@@ -1,4 +1,5 @@
 import React from 'react';
+import validaBotao from './components';
 import Card from './components/Card';
 import Form from './components/Form';
 
@@ -27,6 +28,10 @@ class App extends React.Component {
     this.setState({
       [name]: value,
     });
+
+    this.setState((estadoAnterior) => (
+      { isSaveButtonDisabled: validaBotao(estadoAnterior) }
+    ));
   }
 
   onSaveButtonClick = () => {
