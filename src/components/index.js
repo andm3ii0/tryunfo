@@ -6,7 +6,6 @@ const validaObj = (receiveObj) => {
     cardAttr2: '',
     cardAttr3: '',
     cardImage: '',
-    cardRare: '',
   };
 
   const aProps = Object.getOwnPropertyNames(receiveObj);
@@ -59,7 +58,6 @@ function validaBotao(obj) {
     cardAttr2,
     cardAttr3,
     cardImage,
-    cardRare,
   } = obj;
 
   const receiveObj = {
@@ -69,7 +67,6 @@ function validaBotao(obj) {
     cardAttr2,
     cardAttr3,
     cardImage,
-    cardRare,
   };
 
   return !(validaObj(receiveObj) && validaAttr(cardAttr1, cardAttr2, cardAttr3));
