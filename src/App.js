@@ -7,6 +7,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      cardList: [],
       cardName: '',
       cardDescription: '',
       cardAttr1: '',
@@ -36,7 +37,30 @@ class App extends React.Component {
   }
 
   onSaveButtonClick = () => {
-    this.setState((state) => ({ cardName: '',
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+    } = this.state;
+
+    const newCard = {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+    };
+    this.setState((state) => ({
+      cardList: [...state.cardList, newCard],
+      cardName: '',
       cardDescription: '',
       cardAttr1: '0',
       cardAttr2: '0',
@@ -50,6 +74,7 @@ class App extends React.Component {
 
   render() {
     const {
+      cardList,
       cardName,
       cardDescription,
       cardAttr1,
@@ -61,7 +86,8 @@ class App extends React.Component {
       cardTrunfo,
       isSaveButtonDisabled,
       onInputChange,
-      onSaveButtonClick } = this.state;
+      onSaveButtonClick,
+    } = this.state;
     return (
       <>
         <Form
@@ -88,6 +114,17 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
+        {cardList.map((card) => (<Card
+          key={ card.cardName }
+          cardName={ card.cardName }
+          cardDescription={ card.cardDescription }
+          cardAttr1={ card.cardAttr1 }
+          cardAttr2={ card.cardAttr2 }
+          cardAttr3={ card.cardAttr3 }
+          cardImage={ card.cardImage }
+          cardRare={ card.cardRare }
+          cardTrunfo={ card.cardTrunfo }
+        />))}
       </>
     );
   }
