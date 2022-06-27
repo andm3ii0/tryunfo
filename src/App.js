@@ -72,6 +72,16 @@ class App extends React.Component {
       isSaveButtonDisabled: true }));
   }
 
+  onRemoveButton = (event) => {
+    console.log(event);
+    this.setState((state) => ({
+      cardList: state.cardList.filter((card) => (
+        card.cardName !== event.target.attributes.id.nodeValue)),
+      hasTrunfo: event.target.attributes.class.nodeValue === 'true'
+        ? false : state.hasTrunfo,
+    }));
+  }
+
   render() {
     const {
       cardList,
@@ -114,17 +124,28 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
-        {cardList.map((card) => (<Card
-          key={ card.cardName }
-          cardName={ card.cardName }
-          cardDescription={ card.cardDescription }
-          cardAttr1={ card.cardAttr1 }
-          cardAttr2={ card.cardAttr2 }
-          cardAttr3={ card.cardAttr3 }
-          cardImage={ card.cardImage }
-          cardRare={ card.cardRare }
-          cardTrunfo={ card.cardTrunfo }
-        />))}
+        {cardList.map((card) => (
+          <div key={ card.cardName }>
+            <button
+              className={ `${card.cardTrunfo}` }
+              id={ card.cardName }
+              onClick={ this.onRemoveButton }
+              type="button"
+              data-testid="delete-button"
+            >
+              Excluir
+            </button>
+            <Card
+              cardName={ card.cardName }
+              cardDescription={ card.cardDescription }
+              cardAttr1={ card.cardAttr1 }
+              cardAttr2={ card.cardAttr2 }
+              cardAttr3={ card.cardAttr3 }
+              cardImage={ card.cardImage }
+              cardRare={ card.cardRare }
+              cardTrunfo={ card.cardTrunfo }
+            />
+          </div>))}
       </>
     );
   }
